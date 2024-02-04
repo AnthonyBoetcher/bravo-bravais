@@ -17,14 +17,42 @@
             justify-content: center;
             align-items: center;
         }
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .control-label {
+            margin-bottom: 5px;
+        }
+        .control-input {
+            width: 100px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
 <div id="container"></div>
+<div class="controls">
+    <div class="control-label">Lattice Type:</div>
+    <select class="control-input" id="latticeType">
+        <option value="simpleCubic">Simple Cubic</option>
+        <!-- Add more predefined lattice types here -->
+    </select>
+    <div class="control-label">Atomic Size:</div>
+    <input class="control-input" type="number" id="atomicSize" value="0.1">
+    <button class="control-button" onclick="updateLattice()">Update Lattice</button>
+</div>
 <!-- Correct paths and file extensions -->
-<script src="three.js"></script>
-<script src="OrbitControls.js"></script>
-<script>
+<script type="module">
+    import * as THREE from './three.module.js'; // Import Three.js as a module
+    import { OrbitControls } from './OrbitControls.js'; // Import OrbitControls as a module
+
     // Set up scene, camera, and renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -33,21 +61,35 @@
     renderer.shadowMap.enabled = true; // Enable shadows
     document.getElementById('container').appendChild(renderer.domElement);
 
+    // Initialize latticeMesh variable
+    let latticeMesh = null;
+
     // Create a simple cubic lattice with shadows
-    const latticeSize = 5;
-    const latticeSpacing = 2;
-    for (let x = 0; x < latticeSize; x++) {
-        for (let y = 0; y < latticeSize; y++) {
-            for (let z = 0; z < latticeSize; z++) {
-                const geometry = new THREE.SphereGeometry(0.1, 32, 32);
-                const material = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // Use MeshStandardMaterial for shadows
-                const atom = new THREE.Mesh(geometry, material);
-                atom.position.set(x * latticeSpacing, y * latticeSpacing, z * latticeSpacing);
-                atom.castShadow = true; // Enable casting shadows
-                atom.receiveShadow = true; // Enable receiving shadows
-                scene.add(atom);
+    function createLattice(type, atomicSize) {
+        if (latticeMesh) {
+            scene.remove(latticeMesh); // Remove previous lattice
+        }
+
+        const latticeSize = 5;
+        const latticeSpacing = 2;
+        const latticeGeometry = new THREE.Geometry();
+
+        for (let x = 0; x < latticeSize; x++) {
+            for (let y = 0; y < latticeSize; y++) {
+                for (let z = 0; z < latticeSize; z++) {
+                    const geometry = new THREE.SphereGeometry(atomicSize, 32, 32);
+                    const material = new THREE.MeshStandardMaterial({ color: 0xff0000 }); // Use MeshStandardMaterial for shadows
+                    const atom = new THREE.Mesh(geometry, material);
+                    atom.position.set(x * latticeSpacing, y * latticeSpacing, z * latticeSpacing);
+                    latticeGeometry.mergeMesh(atom);
+                }
             }
         }
+
+        latticeMesh = new THREE.Mesh(latticeGeometry, new THREE.MeshStandardMaterial({ color: 0xff0000 }));
+        latticeMesh.castShadow = true; // Enable casting shadows
+        latticeMesh.receiveShadow = true; // Enable receiving shadows
+        scene.add(latticeMesh);
     }
 
     // Set camera position
@@ -70,7 +112,7 @@
     directionalLight.shadow.camera.far = 50; // Far shadow camera distance
 
     // Add orbit controls for rotation
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     // Define render function
     function animate() {
@@ -81,6 +123,13 @@
 
     // Call render function
     animate();
+
+    // Function to update lattice based on user inputs
+    function updateLattice() {
+        const latticeType = document.getElementById('latticeType').value;
+        const atomicSize = parseFloat(document.getElementById('atomicSize').value);
+        createLattice(latticeType, atomicSize);
+    }
 </script>
 </body>
 </html>

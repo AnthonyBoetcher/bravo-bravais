@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bravo Bravais</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" sizes="180x180" href="lattice.png">
+<link rel="icon" type="image/png" sizes="32x32" href="lattice.png">
+<link rel="icon" type="image/png" sizes="16x16" href="lattice.png">
+<script>
+    function alertUser(msg) {
+alert(msg);
+}
+</script>
+
+</head>
+
+<body onload="alertUser('Download Models and Upload to Model Viewer by clicking 1)File Manager, 2) Select Model and 3) GLB>')">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_allUnitCells.glb" download="1_allUnitCells.glb"><button class="btn btn-primary btn-block">All Unit Cells</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_primitive_hexagonal_&trigonal.glb" download="1_primitive_hexagonal_&trigonal.glb"><button class="btn btn-primary btn-block">Hexagonal</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_primitive_cubic.glb" download="1_primitive_cubic.glb"><button class="btn btn-primary btn-block">Primitive Cubic</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_FCC_NaCL_DISSECTION.glb" download="1_FCC_NaCL_DISSECTION.glb"><button class="btn btn-primary btn-block">FCC in NaCL Dissection</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_FCC.glb" download="1_FCC.glb"><button class="btn btn-primary btn-block">FCC</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_FCC_orthorombic.glb" download="1_FCC_orthorombic.glb"><button class="btn btn-primary btn-block">FCC Orthorombic</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_FCC2.glb" download="1_FCC2.glb"><button class="btn btn-primary btn-block">FCC V2</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_BCCTetragonal.glb" download="1_BCCTetragonal.glb"><button class="btn btn-primary btn-block">BCC Tetragonal</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_BCCOrthorombic.glb" download="1_BCCOrthorombic.glb"><button class="btn btn-primary btn-block">BCC Orthorombic</button></a>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+                <a href="1_BCC.glb" download="1_BCC.glb"><button class="btn btn-primary btn-block">BCC</button></a>
+            </div>
+        </div>
+    </div>
+
+    <iframe src="https://modelviewer.dev/editor/" style="width: 100%; height: 100vh; border: none;"></iframe>
+
+</body>
+
+<!-- Bootstrap JS and jQuery (optional, but recommended for Bootstrap functionality) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+    h3{
+        color: red;
+    }
+    button {
+        border-radius: 5px;
+        text-decoration:none;
+    }
+    button:hover {
+        cursor: pointer;
+        text-decoration:none;
+    }
+    body{
+        background-image: url('2.png');
+        background-repeat: none;
+        background-size: cover;
+    }
+</style>
+
+</html>
